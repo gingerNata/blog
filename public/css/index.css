@@ -1,0 +1,22 @@
+.author img{
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+    border: 5px solid #e5eaee;
+}
+.author {
+    vertical-align: middle;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.bottom-article{
+    background-color: #eeeeee;
+    height: 50px;
+    bottom: 0;
+    vertical-align: bottom;
+    position: absolute;
+}
+.post-preview{
+    height: 580px;
+}

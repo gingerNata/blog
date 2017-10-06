@@ -117,7 +117,7 @@ class PostsController extends Controller
 
 
     $path = '/images/medium/'. $file_name;
-    $image = Image::make($request->file('image'))->fit(280, 210)->stream();
+    $image = Image::make($request->file('image'))->fit(270, 200)->stream();
     Storage::disk('public')->put($path, $image);
 
     return $file_name;

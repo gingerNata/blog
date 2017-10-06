@@ -1,5 +1,5 @@
 function likePost(id){
-    var el = document.getElementById("like");
+    var el = document.getElementById("like"+id);
     var postId = id;
 
     $.ajax({
@@ -10,24 +10,21 @@ function likePost(id){
             if (token) {
                 return xhr.setRequestHeader('X-CSRF-TOKEN', token);
             }
-            console.log(token);
 
         },
         data: {'id': postId},
         success:function(data){
-            console.log(data);
-            // $( "."+postId ).load('../like/post  .'+postId);
-            var count = parseInt($("#count_likes").text());
+            var elem = $("#count-likes-"+id);
+            var count = parseInt(elem.text());
+            var active = $("#like-"+id);
             if(data == 'like') {
                 count += 1;
-                $("#count_likes").text(count);
-                $(el).addClass('active');
+                elem.text(count);
+                active.addClass('active');
             }else {
                 count -= 1;
-                $("#count_likes").text(count);
-
-                $(el).removeClass('active');
-                // $("#count_likes").text("count - 1");
+                elem.text(count);
+                active.removeClass('active');
             }
 
         },

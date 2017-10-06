@@ -37,9 +37,9 @@
                         <p> Тема: {{ $data['theme']->title }}</p>
 
                         <div class="likes">
-                            <button class="like-btn {{ $data['like'] }}" id="like"
+                            <button class="like-btn {{ $data['like'] }}" id="like-{{ $data['post']->id }}"
                                     onclick="likePost({{ $data['post']->id }})"></button>
-                            <span id="count_likes"> {{ $data['post']->votes }}</span>
+                            <span id="count-likes-{{ $data['post']->id }}"> {{ $data['post']->votes }}</span>
                             <div class="sharethis-inline-share-buttons"></div>
                         </div>
 

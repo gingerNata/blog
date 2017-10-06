@@ -10,11 +10,12 @@
     {{--<meta name="twitter:card" content="summary" />--}}
     {{--<meta name="twitter:site" content="@nytimesbits" />--}}
     {{--<meta name="twitter:creator" content="@nickbilton" />--}}
-    <meta property="og:url" content="http://bits.blogs.nytimes.com/2011/12/08/a-twitter-for-my-sister/" />
-    <meta property="og:title" content="A Twitter for My Sister" />
-    <meta property="og:type" content="Article" />
-    <meta property="og:description" content="In the keep the rocket ship from stalling." />
-    <meta property="og:image" content="http://graphics8.nytimes.com/images/2011/12/08/technology/bits-newtwitter/bits-newtwitter-tmagArticle.jpg" />
+    <meta property="og:url" content="http://bits.blogs.nytimes.com/2011/12/08/a-twitter-for-my-sister/"/>
+    <meta property="og:title" content="A Twitter for My Sister"/>
+    <meta property="og:type" content="Article"/>
+    <meta property="og:description" content="In the keep the rocket ship from stalling."/>
+    <meta property="og:image"
+          content="http://graphics8.nytimes.com/images/2011/12/08/technology/bits-newtwitter/bits-newtwitter-tmagArticle.jpg"/>
     <meta property="fb:admins" content="1256049241">
     <meta property="fb:app_id" content="121695974580830">
 
@@ -23,10 +24,11 @@
 
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="/css/header.css" rel="stylesheet">
     <link href="/css/post.css" rel="stylesheet">
-
+    <link href="/css/index.css" rel="stylesheet">
 
 
     <script>
@@ -45,18 +47,19 @@
 </head>
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 
 
 @include('layouts.headerNavigation')
 @yield('slider')
 
+<div class="container-wrapper">
+    <div class="container main-content">
+        @yield('content')
+    </div>
 
-<div class="container">
-    @yield('content')
 </div>
-
-
 </body>
 </html>
