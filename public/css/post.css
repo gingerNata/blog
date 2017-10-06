@@ -1,0 +1,73 @@
+.post-submitted-info {
+    width: 55px;
+    float: left;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1;
+    position: absolute;
+    top: 45px;
+    left: 0;
+}
+
+.submitted-date {
+    margin: 26px 0 0 0;
+    border-right: 1px solid #c2c2c2;
+    padding-bottom: 10px;
+}
+
+.post-submitted-info .month, .post-submitted-info .year {
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.post-submitted-info .month {
+    margin-top: -2px;
+}
+
+.post-submitted-info .day {
+    font-size: 29px;
+    font-weight: 900;
+    margin-bottom: 2px;
+}
+
+.main-content.custom-width {
+    margin-left: 75px;
+}
+
+button.active {
+    background: url("/storage/icons/heart2.png") no-repeat;
+    background-size: contain;
+
+}
+
+.like-btn {
+    background: url("/storage/icons/heart1.png") no-repeat;
+    background-size: contain;
+    border: none;
+    height: 30px;
+    width: 30px;
+}
+
+button:focus {
+    border: none;
+    outline: none;
+}
+
+.views:before {
+    background: url("/storage/icons/views.gif") no-repeat top;
+    background-size: contain;
+    height: 30px;
+    width: 38px;
+    display: block;
+    content: '';
+    float: left;
+    margin: 0 2px 0 0;
+}
+.views{
+    line-height: 30px;
+    color: #777;
+    float: right;
+}
+.lead{
+    display: inline-block;
+}

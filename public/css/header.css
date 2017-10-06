@@ -1,0 +1,10 @@
+.avatar img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+.avatar{
+    float: left;
+    padding-top: 6px;
+}
