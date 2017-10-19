@@ -2,17 +2,6 @@
 
 @section('content')
 
-    {!! Form::model($post, ['method' => 'DELETE', 'action' => ['PostsController@delete', $post->id]]) !!}
-
-    <div class="form-group">
-        {!! Form::submit('Видалити',
-          array('class'=>'btn btn-danger')) !!}
-    </div>
-
-    {{ csrf_field() }}
-    {!! Form::close() !!}
-
-
 
     <h1>Редагувати {{ $post->title }}</h1>
 
@@ -51,7 +40,7 @@
     <div class="form-group">
         {!! Form::label('Стаття') !!}
         {!! Form::textarea('body', $post->body,
-            array('required',
+            array(
                   'class'=>'form-control',
                   'placeholder'=>'Повний текст статті')) !!}
     </div>
@@ -59,6 +48,15 @@
     <div class="form-group">
         {!! Form::submit('Зберегти',
           array('class'=>'btn btn-primary')) !!}
+    </div>
+    {{ csrf_field() }}
+    {!! Form::close() !!}
+
+
+    {!! Form::model($post, ['method' => 'DELETE', 'action' => ['PostsController@delete', $post->id]]) !!}
+    <div class="form-group pull-right">
+        {!! Form::submit('Видалити',
+          array('class'=>'btn btn-danger')) !!}
     </div>
     {{ csrf_field() }}
     {!! Form::close() !!}

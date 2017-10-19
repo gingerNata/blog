@@ -38,12 +38,28 @@
     </script>
     <script src="/js/like.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    {{--<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=sd8ro0e1vm3hkpnxdrds70oyxovd6yf0bhdac010cm254zz6"></script>--}}
+    <script src="/src/js/vendor/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            language: 'ru',
+            skin: 'custom',
+//            content_css : '/mycontent.css',
+            menubar: false,
+            toolbar: 'undo redo styleselect  forecolor backcolor fontselect fontsizeselect bold italic alignleft aligncenter alignright bullist ' +
+            'advlist numlist code link unlink image hr outdent indent anchor table tabledelete',
+            plugins: 'advlist code hr image imagetools anchor link paste table textcolor colorpicker media textcolor lists',
+
+            images_upload_url: '/postAcceptor.php'
+        });
+    </script>
+
 </head>
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -59,7 +75,17 @@
     <div class="container main-content">
         @yield('content')
     </div>
-
 </div>
+
+<div class="container-wrapper">
+    <div class="container bottom-content">
+        @yield('bottom-content')
+    </div>
+</div>
+
+
+
+@include('layouts.footer')
+
 </body>
 </html>

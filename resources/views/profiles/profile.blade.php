@@ -59,19 +59,47 @@
             <div class="col-md-12 ">
                 <h1 class="text-center">Статті автора</h1>
                 <hr>
-                <div class="row">
-                    @foreach($user->posts as $post)
-                        <aricle>
-                            <div class="col-md-3">
-                                {{--<p class="author">{{ $post->author }}</p>--}}
-                                <a href="{{ route('post', ['id' => $post->id]) }}"><img class="img-fluid rounded" src="{{ asset('storage/images/medium/' . $post->image) }}" alt=""></a>
-                                <a href="{{ route('post', ['id' => $post->id]) }}"><h3>{{ $post->title }}</h3></a>
-                                <p><a href="{{ route('editPost', ['id' => $post->id]) }}" class="btn btn-default">Редагувати</a>
-                                    <a href="{{ route('deletePost', ['id' => $post->id]) }}" class="btn btn-default">Видалити</a></p>
-                            </div>
-                        </aricle>
-                    @endforeach
-                </div>
+                @if (empty($user->posts[0]))
+                    <a class="btn btn-success" href="{{ route('postForm') }}">Написати статтю</a>
+                @endif
+                    @foreach($user->posts as $i => $post)
+                            @if($i%4 == 0 || $i == 0)<div class="row">@endif
+                                <aricle>
+                                    <div class="col-md-3 post-preview">
+                                        <div class="author">
+                                            <a href="{{ route('authorPage', $post->user->id) }}">
+                                                <img src="{{ asset('storage/avatars/' . $post->user->avatar) }}" alt="">
+                                            </a>
+                                        </div>
+                                        <p class="author">
+                                            <a href="{{ route('authorPage', $post->user->id) }}">
+                                                {{ $post->user->name }}
+                                            </a>
+                                        </p>
+                                        <a href="{{ route('post', ['id' => $post->id]) }}"><img class="img-fluid rounded"
+                                                                                                src="{{ asset('storage/images/medium/' . $post->image) }}"
+                                                                                                alt=""></a>
+                                        <a href="{{ route('post', ['id' => $post->id]) }}"><h3>{{ $post->title }}</h3></a>
+
+                                        <div class="bottom-article">
+                                            <p class="views"><span>{{ $post->views }}</span></p>
+                                            <div class="likes">
+                                                <button class="like-btn {{ Cookie::has('post_' . $post->id) ? 'active' : ''}}"
+                                                        id="like-{{ $post->id }}"
+                                                        onclick="likePost({{ $post->id }})"></button>
+                                                <span id="count-likes-{{ $post->id }}"> {{ $post->votes }}</span>
+                                            </div>
+                                        </div>
+                                        <p><a href="{{ route('editPost', ['id' => $post->id]) }}" class="btn btn-default">Редагувати</a>
+                                        <a href="{{ route('deletePost', ['id' => $post->id]) }}" class="btn btn-danger">Видалити</a>
+                                        </p>
+                                    </div>
+                                </aricle>
+
+                                @if($i%4 == 3 || $i == count($user->posts)-1)</div>@endif
+
+                        @endforeach
+
             </div>
         </div>
     </div>

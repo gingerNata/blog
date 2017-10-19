@@ -19,12 +19,17 @@
                         <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                         <span class="sr-only">(current)</span></a></li>
                 <li><a href="{{ route('postForm') }}">Написати статтю</a></li>
+                @if (Gate::allows('admin'))
+                    <li><a href="{{ route('postslist') }}">Список статей</a></li>
+                @endif
 
             </ul>
             </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ route('setLocale', 'ru') }}">RU</a></li>
+                <li><a href="{{ route('setLocale', 'ua') }}">UA</a></li>
                 <!-- Authentication Links -->
                 @if (Auth::guest())
                     <li><a href="{{ url('/login') }}">Login</a></li>

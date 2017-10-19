@@ -10,44 +10,45 @@
 @endsection
 
 @section('content')
-    @foreach($posts as $i => $post)
-            @if($i%4 == 1 || $i == 0)<div class="row">@endif
-{{ $i }}
-        <aricle>
-            <div class="col-md-3 post-preview">
-                <div class="author">
-                    <a href="{{ route('authorPage', $post->user->id) }}">
-                        <img src="{{ asset('storage/avatars/' . $post->user->avatar) }}" alt="">
-                    </a>
-                </div>
-                <p class="author">
-                    <a href="{{ route('authorPage', $post->user->id) }}">
-                        {{ $post->user->name }}
-                    </a>
-                </p>
-                <a href="{{ route('post', ['id' => $post->id]) }}"><img class="img-fluid rounded"
-                                                                        src="{{ asset('storage/images/medium/' . $post->image) }}"
-                                                                        alt=""></a>
-                <a href="{{ route('post', ['id' => $post->id]) }}"><h3>{{ $post->title }}</h3></a>
+    <div class="col-md-3 col-1">
+        <div class="row">
+            @if(!empty($posts[1]))
+                @foreach($posts[1] as $i => $post)
+                    @include('posts.postPreview',['post'=>$post])
+                @endforeach
+            @endif
+        </div>
+    </div>
+    <div class="col-md-3 col-2">
+        <div class="row">
+            @if(!empty($posts[2]))
+                @foreach($posts[2] as $i => $post)
+                    @include('posts.postPreview',['post'=>$post])
+                @endforeach
+            @endif
+        </div>
+    </div>
+    <div class="col-md-3 col-3">
+        <div class="row">
+            @if(!empty($posts[3]))
+                @foreach($posts[3] as $i => $post)
+                    @include('posts.postPreview',['post'=>$post])
+                @endforeach
+            @endif
+        </div>
+    </div>
+    <div class="col-md-3 col-4">
+        <div class="row">
+            @if(!empty($posts[4]))
+                @foreach($posts[4] as $i => $post)
+                    @include('posts.postPreview',['post'=>$post])
+                @endforeach
+            @endif
+        </div>
+    </div>
 
-                <div class="bottom-article">
-                    <p class="views"><span>{{ $post->views }}</span></p>
-                    <div class="likes">
-                        <button class="like-btn {{ Cookie::has('post_' . $post->id) ? 'active' : ''}}"
-                                id="like-{{ $post->id }}"
-                                onclick="likePost({{ $post->id }})"></button>
-                        <span id="count-likes-{{ $post->id }}"> {{ $post->votes }}</span>
-                    </div>
-                </div>
-                {{--<p><a href="{{ route('editPost', ['id' => $post->id]) }}" class="btn btn-default">Редагувати</a>--}}
-                {{--<a href="{{ route('deletePost', ['id' => $post->id]) }}" class="btn btn-default">Видалити</a>--}}
-                {{--</p>--}}
-            </div>
-        </aricle>
-
-            @if($i%4 == 1 || $i == count($posts))</div>@endif
-
-            @endforeach
 
 
 @endsection
+
+

@@ -6,6 +6,7 @@ use App\Theme;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Post;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Cookie;
@@ -18,15 +19,18 @@ class PostsController extends Controller
    * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
    */
   public function getPost($id) {
-    $data = array();
     $post = Post::where('id', $id)->first();
 
+    $data = array();
+    $data['new_posts'] = $this->getNewPosts($id);
+    $data['popular_posts'] = $this->getPopularPosts($id);
+    $data['themes'] =  $this->getThemes();
     $data['post'] = $post;
     $data['author'] = $post->user;
     $data['theme'] = $post->theme;
     $data['like'] = Cookie::has('post_' . $id) ? 'active' : '';
+    
     $response = view('posts.post', ['data' => $data]);
-
     if(!Cookie::has('post_view_' . $id)){
       $post->update(['views' => $post->views += 1]);
       $response = response($response)->cookie('post_view_' . $id, 'one_more');
@@ -35,6 +39,36 @@ class PostsController extends Controller
     return $response;
   }
 
+  /**
+   * @param $this_id
+   * @return mixed
+   */
+  public function getNewPosts($this_id){
+    return Post::where('id', '<>', $this_id)->orderBy('created_at', 'desc')->take(4)->get();
+  }
+
+  /**
+   * @param $this_id
+   * @return mixed
+   */
+  public function getPopularPosts($this_id){
+    return Post::where('id', '<>', $this_id)->orderBy('votes', 'desc')->take(4)->get();
+  }
+
+  /**
+   * @return array
+   */
+  public function getThemes(){
+    $themes = array();
+    $themes_raw = Theme::all();
+    foreach ($themes_raw as $key => $theme){
+      if(!$theme->post->isEmpty()){
+        $themes[$key] = $theme;
+        $themes[$key]['count'] = $theme->post->count();
+      }
+    }
+    return $themes;
+  }
 
   /**
    * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -61,6 +95,11 @@ class PostsController extends Controller
   public function update(Request $request, $id) {
     $post = Post::findOrNew($id);
 
+    if (Gate::denies('post-owner', $post)) {
+      return redirect()->back();
+    }
+
+
     $theme_title = $request->input('theme_id');
     $theme = Theme::where('title', $theme_title)->first();
     if (!$theme) {
@@ -84,6 +123,12 @@ class PostsController extends Controller
    * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
    */
   public function store(Request $request) {
+    $rules = [
+      'image' => 'required|image',
+      'body' => 'required|min:300'
+    ];
+  $this->validate($request, $rules);
+
     $theme_title = $request->input('theme_id');
     $theme = Theme::where('title', $theme_title)->first();
       if (!$theme) {
@@ -117,7 +162,7 @@ class PostsController extends Controller
 
 
     $path = '/images/medium/'. $file_name;
-    $image = Image::make($request->file('image'))->fit(270, 200)->stream();
+    $image = Image::make($request->file('image'))->fit(260, 180)->stream();
     Storage::disk('public')->put($path, $image);
 
     return $file_name;
@@ -130,6 +175,10 @@ class PostsController extends Controller
    */
   public function delete(Request $request, $id) {
     $post = Post::findOrFail($id);
+    if (Gate::denies('post-owner', $post)) {
+      return redirect()->back();
+    }
+
     Storage::delete('/public/images/' . $post->image);
 
     $post->delete();

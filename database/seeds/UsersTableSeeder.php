@@ -16,13 +16,13 @@ class UsersTableSeeder extends Seeder
               'avatar' => 'default.png',
               'name' => 'Guest',
               'email' => 'Guest@mail.com',
-              'password' => 'qwerty',
+              'password' => '$2y$10$JjrQHFQDHSwWtDhvJYTWIeFpPEX.JcW2UdcwiGXOBA.IP9rtRfqgC',
           ],
           [
               'avatar' => 'default.png',
               'name' => 'Admin',
               'email' => 'admin@mail.com',
-              'password' => 'qwerty',
+              'password' => '$2y$10$JjrQHFQDHSwWtDhvJYTWIeFpPEX.JcW2UdcwiGXOBA.IP9rtRfqgC',
           ],
          )
         );

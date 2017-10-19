@@ -12,6 +12,6 @@ class Theme extends Model
    * @return \Illuminate\Database\Eloquent\Relations\HasOne
    */
   public function post(){
-    return $this->hasOne('App\Post', 'theme_id', 'title');
+    return $this->hasMany('App\Post', 'theme_id');
   }
 }
