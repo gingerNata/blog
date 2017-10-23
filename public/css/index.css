@@ -1,16 +1,29 @@
-.author img{
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
+}
+
+.author img {
     height: 70px;
     width: 70px;
     border-radius: 50%;
     border: 4px double #e5eaee;
 }
+
 .author {
     vertical-align: middle;
     margin: 10px auto;
     text-align: center;
 }
 
-.bottom-article{
+.bottom-article {
     background-color: #eeeeee;
     height: 50px;
     bottom: 0;
@@ -19,27 +32,33 @@
     padding: 10px 20px;
     margin: 0 auto;
 }
-.post-preview{
+
+.post-preview {
     /*height: 460px;*/
 }
-.post-preview h3{
+
+.post-preview h3 {
     text-align: center;
     margin: 10px;
     font-size: 21px;
 }
-.post-preview img.rounded{
+
+.post-preview img.rounded {
     width: 100%;
     height: auto;
 }
-.row{
+
+.row {
     margin: 20px 0;
 }
+
 .footer {
     color: #ccc;
     height: 60px;
     line-height: 60px;
 }
-.jumbotron{
+
+.jumbotron {
     background-image: url("../images/ws_Mountain_View_1366x768.jpg");
     background-repeat: no-repeat;
     background-position: 4% -157px;
@@ -47,20 +66,27 @@
     color: white;
     margin-bottom: 0;
 }
-@media screen and (min-width: 1370px)  {
-    .jumbotron{
+
+@media screen and (min-width: 1370px) {
+    .jumbotron {
         background-image: none;
         color: #1d2124;
     }
 }
 
-.grey-bg, .grey-bg .main-content-wrapper{
+.grey-bg, .grey-bg .main-content-wrapper {
     background: #e9e9fc;
 }
 
-.grey-bg .row .post-preview{
+.grey-bg .row .post-preview {
     margin: 15px 0;
     background: white;
     border-radius: 5px;
     border: 1px solid #d4d4e6;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }

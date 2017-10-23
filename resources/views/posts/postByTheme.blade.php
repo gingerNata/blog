@@ -1,8 +1,7 @@
 @extends('layouts.layout')
 
-@section('body-class')
-    grey-bg
-@endsection
+@section('body-class')grey-bg @endsection
+
 @section('content')
     <div class="container main-content">
     <h1>{{ $theme_title }}</h1>

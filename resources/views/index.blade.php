@@ -1,8 +1,6 @@
 @extends('layouts.layout')
 
-@section('body-class')
-    grey-bg
-@endsection
+@section('body-class')grey-bg @endsection
 
 @section('slider')
     <div class="jumbotron">
