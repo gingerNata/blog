@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
-    <div class="container">
+    <div class="container main-content">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
@@ -45,8 +45,7 @@
                                 <label for="name" class="col-md-4 control-label">Про себе</label>
 
                                 <div class="col-md-6">
-                                    <textarea rows="5" id="about" type="" class="form-control" name="about"
-                                              value="{{ $user->about }}"></textarea>
+                                    <textarea rows="5" id="about" type="" class="form-control mceNoEditor" name="about">{{ $user->about }}</textarea>
                                     @if ($errors->has('about'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('about') }}</strong>

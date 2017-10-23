@@ -9,7 +9,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Джерело життя</a>
+            <a class="navbar-brand" href="/">
+                <div id="logo"></div>
+            </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -24,28 +26,22 @@
                 @endif
 
             </ul>
-            </li>
-            </ul>
-
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ route('setLocale', 'ru') }}">RU</a></li>
-                <li><a href="{{ route('setLocale', 'ua') }}">UA</a></li>
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    <li><a href="{{ url('/login') }}">Login</a></li>
-                    <li><a href="{{ url('/register') }}">Register</a></li>
+                    <li><a href="{{ url('/login') }}">Вхід</a></li>
+                    <li><a href="{{ url('/register') }}">Регістрація</a></li>
                 @else
-                    <span class="avatar">
-                        <img src="{{ asset('storage/avatars/' . Auth::user()->avatar) }}" alt="">
-                    </span>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <img class="avatar" src="{{ asset('storage/avatars/' . Auth::user()->avatar) }}" alt="">
                             {{ Auth::user()->name }}
                             <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
                             <li>
+
                                 <a href="{{ route('profile') }}">Профіль</a>
                                 <a href="{{ url('/logout') }}"
                                    onclick="event.preventDefault();
@@ -62,6 +58,7 @@
                     </li>
                 @endif
             </ul>
+        </div>
 
-        </div><!-- /.container-fluid -->
+    </div><!-- /.container-fluid -->
 </nav>

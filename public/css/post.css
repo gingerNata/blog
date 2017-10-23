@@ -1,18 +1,12 @@
 .post-submitted-info {
-    width: 55px;
-    float: left;
     font-weight: 700;
-    text-align: center;
     line-height: 1;
-    position: absolute;
-    top: 45px;
-    left: -50px;
+    text-align: center;
+    padding: 26px 0;
 }
 
 .submitted-date {
-    margin: 26px 0 0 0;
-    border-right: 1px solid #c2c2c2;
-    padding-bottom: 10px;
+    border-right: 1px solid #444;
 }
 
 .post-submitted-info .month, .post-submitted-info .year {
@@ -28,10 +22,6 @@
     font-size: 29px;
     font-weight: 900;
     margin-bottom: 2px;
-}
-
-.main-content.custom-width {
-    margin-left: 25px;
 }
 
 button.active {
@@ -71,72 +61,3 @@ button:focus {
 .lead{
     display: inline-block;
 }
-/************************** social links ********************************/
-
-.social-links {
-    height: 75px;
-    width: 100%;
-    padding-top: 35px;
-    position: relative;
-    /*background: #222 url(https://st2.depositphotos.com/3254189/7736/v/950/depositphotos_77360546-stock-illustration-background-with-seamless-pattern-in.jpg) no-repeat;*/
-    /*background-size: cover;*/
-    overflow: hidden;
-}
-
-.social {
-    position: static;
-    width: 100%;
-    top: 50%;
-    text-align: center;
-    transform: translateY(-50%);
-}
-
-.social .link {
-    display: inline-block;
-    vertical-align: middle;
-    position: relative;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    border: 2px dashed tomato;
-    background-clip: content-box;
-    padding: 5px;
-    transition: .5s;
-    color: #D7D0BE;
-    margin-left: 10px;
-    margin-right: 10px;
-    font-size: 70px;
-}
-
-.social .link span {
-    display: block;
-    position: absolute;
-    text-align: center;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.social .link:hover {
-    padding: 20px;
-    color: white;
-    margin-left: -5px;
-    transform: translateX(10px) rotate(360deg);
-}
-
-.social .link.google-plus {
-    background-color: tomato;
-    color: white;
-}
-
-.social .link.twitter {
-    background-color: #00ACEE;
-    color: white;
-}
-
-.social .link.facebook {
-    background-color: #3B5998;
-    color: white;
-}
-
-/************************** social links ********************************/

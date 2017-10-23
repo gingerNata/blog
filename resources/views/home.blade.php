@@ -1,13 +1,13 @@
 @extends('layouts.layout')
 
 @section('content')
-<div class="container">
+    <div class="container main-content">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading"></div>
                 <div class="panel-body">
-                    You are logged in!
+                    Вітаємо на сайті! Ви успішно увійшли
                 </div>
             </div>
         </div>

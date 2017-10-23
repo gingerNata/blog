@@ -20,16 +20,14 @@
     <meta property="fb:app_id" content="121695974580830">
 
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>{{ config('app.name', 'Джерело життя') }}</title>
+    <title>{{ config('app.name', 'Стиль життя') }}</title>
 
-    <!-- Bootstrap -->
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="/css/header.css" rel="stylesheet">
     <link href="/css/post.css" rel="stylesheet">
     <link href="/css/index.css" rel="stylesheet">
-
+    <link href="/css/sidebar.css" rel="stylesheet">
 
     <script>
         window.Laravel = <?php echo json_encode([
@@ -39,42 +37,21 @@
     <script src="/js/like.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
-    {{--<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=sd8ro0e1vm3hkpnxdrds70oyxovd6yf0bhdac010cm254zz6"></script>--}}
     <script src="/src/js/vendor/tinymce/js/tinymce/tinymce.min.js"></script>
-    <script>
-        tinymce.init({
-            selector: 'textarea',
-            language: 'ru',
-            skin: 'custom',
-//            content_css : '/mycontent.css',
-            menubar: false,
-            toolbar: 'undo redo styleselect  forecolor backcolor fontselect fontsizeselect bold italic alignleft aligncenter alignright bullist ' +
-            'advlist numlist code link unlink image hr outdent indent anchor table tabledelete',
-            plugins: 'advlist code hr image imagetools anchor link paste table textcolor colorpicker media textcolor lists',
-
-            images_upload_url: '/postAcceptor.php'
-        });
-    </script>
-
+    <script src="/js/tinymce_settings.js"></script>
 </head>
-<body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
+
+
+<body class="@yield('body-class')">
 
 
 @include('layouts.headerNavigation')
 @yield('slider')
 
-<div class="container-wrapper">
-    <div class="container main-content">
-        @yield('content')
-    </div>
+<div class="container-wrapper main-content-wrapper">
+    @yield('content')
+</div>
 </div>
 
 <div class="container-wrapper">
@@ -86,6 +63,8 @@
 
 
 @include('layouts.footer')
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 </body>
 </html>

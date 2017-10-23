@@ -1,6 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
+    <div class="container main-content">
     <h1>Написати статтю</h1>
         <ul>
             @foreach($errors->all() as $error)
@@ -47,5 +48,5 @@
     {{ csrf_field() }}
     {!! Form::close() !!}
 
-
+</div>
 @endsection

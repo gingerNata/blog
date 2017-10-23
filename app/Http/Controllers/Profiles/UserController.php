@@ -16,7 +16,11 @@ class UserController extends Controller {
    */
   public function profile() {
 
-    return view('profiles.profile', ['user' => Auth::user()]);
+    if(!Auth::user()){
+      return redirect('/login');
+    }
+    $posts = Controller::reorderPosts(Auth::user()->posts);
+    return view('profiles.profile', ['user' => Auth::user(), 'posts' => $posts, 'allow' => true]);
   }
 
   /**
@@ -89,9 +93,21 @@ class UserController extends Controller {
     return redirect()->route('profile');
   }
 
+  /**
+   * @param $id
+   * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+   */
   public function authorPage($id){
     $user = User::find($id);
-    return view('profiles.profile', ['user' => $user]);
+    if (!$user){
+      return view('errors.404');
+    }
+    $allow = FALSE;
+    if(Auth::user() && (Auth::user() == $user || Auth::user()->id == 2)){
+      $allow = True;
+    }
+    $posts = Controller::reorderPosts($user->posts->sortByDesc('created_at')->where('public', 1));
+    return view('profiles.profile', ['user' => $user, 'posts' => $posts, 'allow' => $allow]);
 
   }
 

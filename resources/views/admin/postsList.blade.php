@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('content')
-<div class="container">
+    <div class="container main-content">
     <h2>Статті</h2>
     <table class="table table-striped">
         <thead>

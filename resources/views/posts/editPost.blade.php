@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+    <div class="container main-content">
     <h1>Редагувати {{ $post->title }}</h1>
 
     <ul>
@@ -61,6 +61,6 @@
     {{ csrf_field() }}
     {!! Form::close() !!}
 
-
+</div>
 
 @endsection

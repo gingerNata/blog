@@ -1,14 +1,16 @@
 @extends('layouts.layout')
 
+
+
 @section('content')
 
-    <div class="container">
+    <div class="container main-content">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <h1 class="text-center">{{ $user->name }}</h1>
                 <hr>
                 <div class="col-md-4">
-                    <img src="{{ asset('storage/avatars/' . $user->avatar) }}" alt="Avatar image">
+                    <img class="img-circle" src="{{ asset('storage/avatars/' . $user->avatar) }}" alt="Avatar image">
 
                     <ul>
                         @foreach($errors->all() as $error)
@@ -16,6 +18,7 @@
                         @endforeach
                     </ul>
 
+                    @if($allow)
                     {!! Form::model($user, ['method' => 'PATCH', 'action' => ['Profiles\UserController@updateAvatar'],
                      'enctype' => "multipart/form-data"]) !!}
 
@@ -32,16 +35,18 @@
                     </div>
                     {{ csrf_field() }}
                     {!! Form::close() !!}
-
+                    @endif
                 </div>
 
                 <div class="col-md-4">
                     <div class="e-mail"><b>E-mail:</b> {{ $user->email }}</div>
-                    <div class="e-mail"><b>Про себе:</b> {{ $user->about }}</div>
+                    <div class="e-mail"><b>Про себе:</b> {{ $user->about or 'Інформація відсутня'}}</div>
                     <br>
+                    @if($allow)
                     <a class="btn btn-primary" href="{{ route('editProfile') }}"> Редагувати профіль</a>
-
+                    @endif
                 </div>
+                @if($allow)
                 <div class="col-md-3">
                     {!! Form::model(Auth::user(), ['method' => 'POST', 'action' => ['Profiles\UserController@delete']]) !!}
 
@@ -53,55 +58,48 @@
                     {{ csrf_field() }}
                     {!! Form::close() !!}
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 ">
-                <h1 class="text-center">Статті автора</h1>
-                <hr>
-                @if (empty($user->posts[0]))
-                    <a class="btn btn-success" href="{{ route('postForm') }}">Написати статтю</a>
                 @endif
-                    @foreach($user->posts as $i => $post)
-                            @if($i%4 == 0 || $i == 0)<div class="row">@endif
-                                <aricle>
-                                    <div class="col-md-3 post-preview">
-                                        <div class="author">
-                                            <a href="{{ route('authorPage', $post->user->id) }}">
-                                                <img src="{{ asset('storage/avatars/' . $post->user->avatar) }}" alt="">
-                                            </a>
-                                        </div>
-                                        <p class="author">
-                                            <a href="{{ route('authorPage', $post->user->id) }}">
-                                                {{ $post->user->name }}
-                                            </a>
-                                        </p>
-                                        <a href="{{ route('post', ['id' => $post->id]) }}"><img class="img-fluid rounded"
-                                                                                                src="{{ asset('storage/images/medium/' . $post->image) }}"
-                                                                                                alt=""></a>
-                                        <a href="{{ route('post', ['id' => $post->id]) }}"><h3>{{ $post->title }}</h3></a>
-
-                                        <div class="bottom-article">
-                                            <p class="views"><span>{{ $post->views }}</span></p>
-                                            <div class="likes">
-                                                <button class="like-btn {{ Cookie::has('post_' . $post->id) ? 'active' : ''}}"
-                                                        id="like-{{ $post->id }}"
-                                                        onclick="likePost({{ $post->id }})"></button>
-                                                <span id="count-likes-{{ $post->id }}"> {{ $post->votes }}</span>
-                                            </div>
-                                        </div>
-                                        <p><a href="{{ route('editPost', ['id' => $post->id]) }}" class="btn btn-default">Редагувати</a>
-                                        <a href="{{ route('deletePost', ['id' => $post->id]) }}" class="btn btn-danger">Видалити</a>
-                                        </p>
-                                    </div>
-                                </aricle>
-
-                                @if($i%4 == 3 || $i == count($user->posts)-1)</div>@endif
-
-                        @endforeach
-
             </div>
         </div>
-    </div>
 
+    </div>
+    <div class="container-fluid main-content grey-bg">
+        <div class="col-md-3 col-1">
+            <div class="row">
+                @if(!empty($posts[1]))
+                    @foreach($posts[1] as $i => $post)
+                        @include('posts.postPreview',['post'=>$post])
+                    @endforeach
+                @endif
+            </div>
+        </div>
+        <div class="col-md-3 col-2">
+            <div class="row">
+                @if(!empty($posts[2]))
+                    @foreach($posts[2] as $i => $post)
+                        @include('posts.postPreview',['post'=>$post])
+                    @endforeach
+                @endif
+            </div>
+        </div>
+        <div class="col-md-3 col-3">
+            <div class="row">
+                @if(!empty($posts[3]))
+                    @foreach($posts[3] as $i => $post)
+                        @include('posts.postPreview',['post'=>$post])
+                    @endforeach
+                @endif
+            </div>
+        </div>
+        <div class="col-md-3 col-4">
+            <div class="row">
+                @if(!empty($posts[4]))
+                    @foreach($posts[4] as $i => $post)
+                        @include('posts.postPreview',['post'=>$post])
+                    @endforeach
+                @endif
+            </div>
+        </div>
+
+    </div>
 @endsection

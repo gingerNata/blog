@@ -45,17 +45,20 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'auth']], function ()
   Route::match(['post', 'get', 'patch'],'public/{id}', 'HomeController@publicPost')->name('publicPost')->where('id', '[0-9]+');
 });
 
-Route::get('profile', 'Profiles\UserController@profile')->name('profile');
-Route::patch('profile', 'Profiles\UserController@updateAvatar')->name('updateAvatar');
-Route::post('profile', 'Profiles\UserController@delete')->name('deleteProfile');
-Route::get('profile/edit', 'Profiles\UserController@editProfile')->name('editProfile');
-Route::post('profile/edit', 'Profiles\UserController@updateData')->name('updateData');
+Route::group(['middleware' => ['web', 'auth']], function () {
+
+  Route::get('profile', 'Profiles\UserController@profile')->name('profile');
+  Route::patch('profile', 'Profiles\UserController@updateAvatar')
+    ->name('updateAvatar');
+  Route::post('profile', 'Profiles\UserController@delete')
+    ->name('deleteProfile');
+  Route::get('profile/edit', 'Profiles\UserController@editProfile')
+    ->name('editProfile');
+  Route::post('profile/edit', 'Profiles\UserController@updateData')
+    ->name('updateData');
+});
 
 Route::get('profile/{pid}', 'Profiles\UserController@authorPage')->name('authorPage');
 Route::get('theme/{theme_id}', 'ThemesController@getPostByTheme')->name('postsByTheme');
 
-//languages
-Route::get('language/{locale}', function ($locale) {
-  App::setLocale($locale);
-  return redirect()->back();
-})->name('setLocale');
+

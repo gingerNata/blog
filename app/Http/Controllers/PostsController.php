@@ -18,9 +18,11 @@ class PostsController extends Controller
    * @param $id
    * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
    */
-  public function getPost($id) {
+  public function getPost(Request $request, $id) {
     $post = Post::where('id', $id)->first();
-
+    if (!$post){
+      return view('errors.404');
+    }
     $data = array();
     $data['new_posts'] = $this->getNewPosts($id);
     $data['popular_posts'] = $this->getPopularPosts($id);
@@ -31,9 +33,14 @@ class PostsController extends Controller
     $data['like'] = Cookie::has('post_' . $id) ? 'active' : '';
     
     $response = view('posts.post', ['data' => $data]);
-    if(!Cookie::has('post_view_' . $id)){
+
+    $cookie = $request->cookie('post_view');
+    $cookie = is_array($cookie) ? $cookie : array();
+
+    if(!$cookie || !in_array($id, $cookie)){
+      $cookie[] = (integer) $id;
+      $response = response($response)->cookie('post_view',  $cookie);
       $post->update(['views' => $post->views += 1]);
-      $response = response($response)->cookie('post_view_' . $id, 'one_more');
     }
 
     return $response;
@@ -112,6 +119,7 @@ class PostsController extends Controller
       $file_name = $this->resize($request);
       $post->update(['image' => $file_name]);
     }
+    $post->public = 0;
     $post->update($request->except('image'));
     return redirect(route('post', ['post' => $post]));
 
@@ -192,14 +200,16 @@ class PostsController extends Controller
    */
   public function likePost(Request $request, $id){
     $post = Post::find($id);
-    $cookie = $request->cookie('post_' . $id);
-    if($cookie){
+    $cookie = $request->cookie('post');
+    if(is_array($cookie) && in_array($id,$cookie)){
       $post->update(['votes' => $post->votes -= 1]);
-      $response = response('dislike')->cookie(Cookie::forget('post_' . $id));
+      $response = response('dislike')->cookie('post', array_diff($cookie, [$id]));
     }
     else{
+      $cookie = is_array($cookie) ? $cookie : array();
       $post->update(['votes' => $post->votes += 1]);
-      $response = response('like')->cookie('post_' . $id, 'like', 50000);
+      $cookie[] = $id;
+      $response = response('like')->cookie('post', $cookie, 50000);
     }
 
     return $response;

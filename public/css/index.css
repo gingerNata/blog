@@ -2,7 +2,7 @@
     height: 70px;
     width: 70px;
     border-radius: 50%;
-    border: 5px solid #e5eaee;
+    border: 4px double #e5eaee;
 }
 .author {
     vertical-align: middle;
@@ -23,9 +23,9 @@
     /*height: 460px;*/
 }
 .post-preview h3{
-    /*border-left: 3px groove #418cce;*/
-    /*padding-left: 25px;*/
-
+    text-align: center;
+    margin: 10px;
+    font-size: 21px;
 }
 .post-preview img.rounded{
     width: 100%;
@@ -33,4 +33,34 @@
 }
 .row{
     margin: 20px 0;
+}
+.footer {
+    color: #ccc;
+    height: 60px;
+    line-height: 60px;
+}
+.jumbotron{
+    background-image: url("../images/ws_Mountain_View_1366x768.jpg");
+    background-repeat: no-repeat;
+    background-position: 4% -157px;
+    height: 300px;
+    color: white;
+    margin-bottom: 0;
+}
+@media screen and (min-width: 1370px)  {
+    .jumbotron{
+        background-image: none;
+        color: #1d2124;
+    }
+}
+
+.grey-bg, .grey-bg .main-content-wrapper{
+    background: #e9e9fc;
+}
+
+.grey-bg .row .post-preview{
+    margin: 15px 0;
+    background: white;
+    border-radius: 5px;
+    border: 1px solid #d4d4e6;
 }

@@ -1,6 +1,10 @@
 @extends('layouts.layout')
 
+@section('body-class')
+    grey-bg
+@endsection
 @section('content')
+    <div class="container main-content">
     <h1>{{ $theme_title }}</h1>
     <div class="count">Кількість статей: {{ $count }}</div>
     <div class="col-md-3 col-1">
@@ -38,5 +42,6 @@
             @endforeach
             @endif
         </div>
+    </div>
     </div>
 @endsection
